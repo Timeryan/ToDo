@@ -1,0 +1,17 @@
+.button_add_note{
+    background-color: #ffffff;
+    border-radius: 10rem;
+    width: 10rem;
+    height: 3.5rem;
+    color: #6e7a95;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 4px 18px -10px rgba(0,0,0,0.75);
+    font-size: 1rem;
+
+}
+.img_plus{
+    stroke: #ff0000;
+    margin-left: -0.4rem;
+}
