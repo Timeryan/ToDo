@@ -7,9 +7,13 @@ import Note from "./components/Note/Note";
 class App extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {count: 0};
+        this.state = {
+            listNotes: [{title: 2, text: "fsd4fs",}, {title: 1, text: "f4fhfdhd"}],
+            count: 0
+        };
     }
-    AddNote = ()=>{
+
+    AddNote = () => {
         this.setState(({count}) => ({
             count: count + 1,
         }));
@@ -20,9 +24,9 @@ class App extends React.Component {
             <div className="App">
                 <ButtonAddNote click={this.AddNote}/>
                 <ProgressNavBar allNote={this.state.count} inProgressNote="1" Completed="1"/>
-                    {[...Array(this.state.count)].map(() =>
-                    <Note title={this.state.count}
-                          text="Name can no longer contain capital letters"/>
+                {this.state.listNotes.map((note) =>
+                    <Note title = {note.title}
+                          text={note.text}/>
                 )}
             </div>
         );
