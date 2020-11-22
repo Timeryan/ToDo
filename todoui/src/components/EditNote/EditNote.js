@@ -1,26 +1,20 @@
 import React from "react"
-import classes from "./Note.module.css"
-import edit from "./edit.svg"
-import cross from "./cross.svg"
-import star from "./star.svg"
+import classes from "./EditNote.module.css"
 
-function Note(props) {
+
+function EditNote(props) {
     return (
-        <div className={classes.note}>
-            <div className={classes.checkbox_title_text}>
-                <input type="checkbox"/>
-                <div className={classes.title_text}>
-                    <span className={classes.title}>{props.title}</span>
-                    <span className={classes.text}>{props.text}</span>
-                </div>
+        <div className={classes.edit_note}>
+            <div className={classes.title_text}>
+                <input placeholder="Title" className={classes.title}>{props.title}</input>
+                <textarea placeholder="Text" className={classes.text}>{props.text}</textarea>
             </div>
-            <div className={classes.star_edit_cross}>
-                <img className={classes.img_star_edit_cross} src={star} alt={star}/>
-                <img className={classes.img_star_edit_cross} src={edit} alt={edit}/>
-                <img className={classes.img_star_edit_cross} src={cross} alt={cross}/>
+            <div className={classes.buttons}>
+                <div className={classes.btn_add_temp}></div>
+                <div className={classes.btn_add_temp}></div>
             </div>
         </div>
     );
 }
 
-export default Note
+export default EditNote

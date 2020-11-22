@@ -1,40 +1,71 @@
-.note{
-    background-color: #ffffff;
+.edit_note{
+    background-color: #f4f4f7;
     border-radius: 0.5rem;
     min-width: 40rem;
     color: #6e7a95;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     box-shadow: 0 4px 18px -10px rgba(0,0,0,0.75);
     font-size: 1rem;
     margin-bottom: 0.75rem;
     padding: 1rem 0;
 }
 .title_text{
+
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     padding: 0 1rem;
 }
-.checkbox_title_text {
-    display: flex;
-    padding-left: 1rem;
-    align-items: center;
-}
-.img_star_edit_cross{
-    width: 1.5rem;
-    margin-left: 0.75rem;
-}
-.star_edit_cross{
-    padding-right: 1rem;
-    display: flex;
-    margin-left: auto;
-}
 .title{
+    font-family: 'Comfortaa', cursive;
+    width: 38rem;
+    margin-bottom: 1rem;
+    border: none;
+    border-bottom: 1px solid #6e7a95;
+    background-color: #f4f4f7;
+    color: #6e7a95;
+    font-size: 1rem;
     font-weight: bold;
-    padding-bottom: 0.5rem;
+    outline: none;
 }
-.text {
-    word-break: break-word;
 
+.text {
+    font-family: 'Comfortaa', cursive;
+    margin-bottom: 1rem;
+    width: 36.5rem;
+    height: 7rem;
+    border: none;
+    outline: none;
+    font-size: 1rem;
+    color: #6e7a95;
+    resize: none;
+    padding: 0.5rem 0.75rem;
+    overflow : auto;
+    border-radius: 1rem;
+
+}
+
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    width: 40rem;
+    height: 3rem;
+
+}
+.btn_add_temp{
+    width: 10rem;
+    height: 3rem;
+    background-color: #ffffff;
+    margin: 0 1rem;
+}
+::-webkit-scrollbar {
+    width: 0.5rem;
+
+}
+
+
+::-webkit-scrollbar-thumb:vertical {
+    background-color: #6e7a95;
+    -webkit-border-radius: 16px;
 }

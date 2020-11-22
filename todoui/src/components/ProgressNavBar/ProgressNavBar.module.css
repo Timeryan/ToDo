@@ -1,7 +1,7 @@
 .progress_nav_bar{
     display: flex;
     justify-content: space-around;
-    padding: 1rem 0;
+    padding: 2rem 0 1rem 0;
     font-size: 1.25rem;
     color: #5271e2;
 }
