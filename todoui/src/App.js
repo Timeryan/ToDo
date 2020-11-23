@@ -11,18 +11,20 @@ class App extends React.Component {
     this.state = {
       listNotes: [],
       isOpenEditNoteForAdd: false,
+      serverApi: "https://71cb250c7f4b.eu.ngrok.io/api/Notes",
       EditNoteForEdit: {
         isOpenEditNoteForEdit: false,
         id: 0,
         title: "",
         text: "",
+
       },
     };
   }
 
   getListNotesFromServer = () => {
     //загрузка
-    fetch("https://localhost:44350/api/Notes")
+    fetch(this.state.serverApi)
       .then((res) => res.json())
       .then((result) => {
         this.setState({
@@ -32,7 +34,7 @@ class App extends React.Component {
   };
   addNoteToServer = (id, title, text) => {
     console.log(title);
-    fetch("https://localhost:44350/api/Notes", {
+    fetch(this.state.serverApi, {
       method: "POST",
       headers: {
         Accept: "text/plain",
@@ -54,7 +56,7 @@ class App extends React.Component {
   delNoteFromServer = (id) => {
     // удаление
 
-    fetch(`https://localhost:44350/api/Notes/${id}`, {
+    fetch(`${this.state.serverApi}/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.text())
@@ -64,7 +66,7 @@ class App extends React.Component {
   };
   editNoteFromServer = (id, title, text) => {
     console.log(id, title, text);
-    fetch(`https://localhost:44350/api/Notes/${id}`, {
+    fetch(`${this.state.serverApi}/${id}`, {
       method: "PUT",
       headers: {
         Accept: "text/plain",
