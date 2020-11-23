@@ -1,0 +1,17 @@
+.button_for_edit_note{
+    background-color: #ffffff;
+    border-radius: 0.3rem;
+    width: 9rem;
+    height: 3rem;
+    color: #6e7a95;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 18px -10px rgba(0,0,0,0.75);
+    font-size: 1rem;
+    margin-right: 1rem;
+
+}
+.img{
+    stroke: #ff0000;
+}

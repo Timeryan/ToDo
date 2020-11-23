@@ -42,7 +42,7 @@
     resize: none;
     padding: 0.5rem 0.75rem;
     overflow : auto;
-    border-radius: 1rem;
+    border-radius: 0.3rem;
 
 }
 
@@ -63,9 +63,13 @@
     width: 0.5rem;
 
 }
+::-webkit-scrollbar-button:start:decrement,
+ ::-webkit-scrollbar-button:end:increment  {
+     height: 1rem;
+ }
 
 
 ::-webkit-scrollbar-thumb:vertical {
     background-color: #6e7a95;
-    -webkit-border-radius: 16px;
+    -webkit-border-radius: 1rem;
 }
