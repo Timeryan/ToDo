@@ -33,13 +33,11 @@ class App extends React.Component {
       });
   };
   addNoteToServer = (id, title, text) => {
-    console.log(title);
     fetch(this.state.serverApi, {
       method: "POST",
       headers: {
         Accept: "text/plain",
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({
         title,
@@ -65,13 +63,11 @@ class App extends React.Component {
       });
   };
   editNoteFromServer = (id, title, text) => {
-    console.log(id, title, text);
     fetch(`${this.state.serverApi}/${id}`, {
       method: "PUT",
       headers: {
         Accept: "text/plain",
         "Content-Type": "application/json",
-        // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({
         id,
