@@ -11,22 +11,27 @@ class App extends React.Component {
     this.state = {
       listNotes: [],
       isOpenEditNoteForAdd: false,
-      isOpenEditNoteForEdit: false,
+      EditNoteForEdit: {
+        isOpenEditNoteForEdit: false,
+        id: 0,
+        title: "",
+        text: "",
+      },
     };
   }
 
   getListNotesFromServer = () => {
     //загрузка
     fetch("https://localhost:44350/api/Notes")
-        .then((res) => res.json())
-        .then((result) => {
-          this.setState({
-            listNotes: result,
-          });
+      .then((res) => res.json())
+      .then((result) => {
+        this.setState({
+          listNotes: result,
         });
+      });
   };
-  addNoteToServer = (title, text) => {
-    //добавление
+  addNoteToServer = (id, title, text) => {
+    console.log(title);
     fetch("https://localhost:44350/api/Notes", {
       method: "POST",
       headers: {
@@ -35,41 +40,68 @@ class App extends React.Component {
         // 'Content-Type': 'application/x-www-form-urlencoded',
       },
       body: JSON.stringify({
-        title: title,
-        text: text,
-        isComplete: false,
+        title,
+        text,
       }),
     })
-        .then((response) => response.json())
-        .then((data) => {
-          this.getListNotesFromServer();
-        });
-    this.HiddenEditNoteForAdd();
+      .then((response) => response.json())
+      .then((data) => {
+        this.getListNotesFromServer();
+      });
+    this.hiddenEditNoteForAdd();
   };
 
   delNoteFromServer = (id) => {
     // удаление
-    console.log(id);
+
     fetch(`https://localhost:44350/api/Notes/${id}`, {
       method: "DELETE",
     })
-        .then((response) => response.text())
-        .then((data) => {
-          this.getListNotesFromServer();
-        });
+      .then((response) => response.text())
+      .then((data) => {
+        this.getListNotesFromServer();
+      });
+  };
+  editNoteFromServer = (id, title, text) => {
+    console.log(id, title, text);
+    fetch(`https://localhost:44350/api/Notes/${id}`, {
+      method: "PUT",
+      headers: {
+        Accept: "text/plain",
+        "Content-Type": "application/json",
+        // 'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: JSON.stringify({
+        id,
+        title,
+        text,
+      }),
+    })
+      .then((response) => response.text())
+      .then((data) => {
+        this.getListNotesFromServer();
+        this.hiddenEditNoteForEdit();
+      });
   };
 
-  ShowEditNoteForAdd = () => {
-    this.setState({isOpenEditNoteForAdd: true});
+  showEditNoteForAdd = () => {
+    this.setState({ isOpenEditNoteForAdd: true });
   };
-  HiddenEditNoteForAdd = () => {
-    this.setState({isOpenEditNoteForAdd: false});
+  hiddenEditNoteForAdd = () => {
+    this.setState({ isOpenEditNoteForAdd: false });
   };
-  ShowEditNoteForEdit = () => {
-    this.setState({isOpenEditNoteForAdd: true});
+  showEditNoteForEdit = (id, title, text) => {
+    this.setState({
+      EditNoteForEdit: {
+        isOpenEditNoteForEdit: true,
+        id: id,
+        title: title,
+        text: text,
+      },
+    });
   };
-  HiddenEditNoteForEdit = () => {
-    this.setState({isOpenEditNoteForAdd: false});
+  hiddenEditNoteForEdit = () => {
+    this.setState({ EditNoteForEdit: { isOpenEditNoteForEdit: false } });
   };
 
   componentDidMount() {
@@ -78,40 +110,45 @@ class App extends React.Component {
 
   render() {
     return (
-        <div className="App">
-          <ButtonAddNote click={this.ShowEditNoteForAdd}/>
-          <ProgressNavBar allNote="1" inProgressNote="1" Completed="1"/>
-          {this.state.isOpenEditNoteForAdd && (
-              <EditNote
-                  functionForCancelButton={this.HiddenEditNoteForAdd}
-                  functionForCheckButton={this.addNoteToServer}
-              />
-          )}
-          {this.state.isOpenEditNoteForEdit && (
-              <EditNote
-                  functionForCancelButton={this.HiddenEditNoteForEdit}
-                  functionForCheckButton={() =>{console.log("1")}}
-              />
-          )}
+      <div className="App">
+        <ButtonAddNote click={this.showEditNoteForAdd} />
+        <ProgressNavBar allNote={this.state.listNotes.length} />
+        {this.state.isOpenEditNoteForAdd && (
+          <EditNote
+            ButtonCheckName={"Добавить"}
+            functionForCancelButton={this.hiddenEditNoteForAdd}
+            functionForCheckButton={this.addNoteToServer}
+          />
+        )}
+        {this.state.EditNoteForEdit.isOpenEditNoteForEdit && (
+          <EditNote
+            ButtonCheckName="Сохранить "
+            id={this.state.EditNoteForEdit.id}
+            title={this.state.EditNoteForEdit.title}
+            text={this.state.EditNoteForEdit.text}
+            functionForCancelButton={this.hiddenEditNoteForEdit}
+            functionForCheckButton={this.editNoteFromServer}
+          />
+        )}
 
-          {this.state.listNotes.map((note, index) => (
-              <Note
-                  functionForCrossButton={this.delNoteFromServer}
-                  functionForEditButton={this.ShowEditNoteForEdit}
-                  key={index}
-                  id={
-                    this.state.listNotes[this.state.listNotes.length - 1 - index].id
-                  }
-                  title={
-                    this.state.listNotes[this.state.listNotes.length - 1 - index]
-                        .title
-                  }
-                  text={
-                    this.state.listNotes[this.state.listNotes.length - 1 - index].text
-                  }
-              />
-          ))}
-        </div>
+        {this.state.listNotes.map((note, index) => (
+          <Note
+            functionForCrossButton={this.delNoteFromServer}
+            functionForEditButton={this.showEditNoteForEdit}
+            key={index}
+            id={
+              this.state.listNotes[this.state.listNotes.length - 1 - index].id
+            }
+            title={
+              this.state.listNotes[this.state.listNotes.length - 1 - index]
+                .title
+            }
+            text={
+              this.state.listNotes[this.state.listNotes.length - 1 - index].text
+            }
+          />
+        ))}
+      </div>
     );
   }
 }

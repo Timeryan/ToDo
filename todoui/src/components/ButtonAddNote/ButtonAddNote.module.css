@@ -9,7 +9,12 @@
     align-items: center;
     box-shadow: 0 4px 18px -10px rgba(0,0,0,0.75);
     font-size: 1rem;
+    user-select: none;
+    transition:  0.15s linear;
 
+}
+.button_add_note:active{
+    box-shadow: none;
 }
 .img_plus{
     stroke: #ff0000;

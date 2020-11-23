@@ -10,6 +10,7 @@
     margin-bottom: 0.75rem;
     padding: 1rem 0;
 }
+
 .title_text{
     display: flex;
     flex-direction: column;
@@ -21,11 +22,11 @@
     padding-left: 1rem;
     align-items: center;
 }
-.img_star_edit_cross{
+.img_edit_cross{
     width: 1.5rem;
     margin-left: 0.75rem;
 }
-.star_edit_cross{
+.edit_cross{
     padding-right: 1rem;
     display: flex;
     margin-left: auto;
